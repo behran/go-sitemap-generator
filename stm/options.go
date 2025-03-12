@@ -4,31 +4,40 @@ package stm
 func NewOptions() *Options {
 	// Default values
 	return &Options{
-		defaultHost:  "http://www.example.com",
-		sitemapsHost: "", // http://s3.amazonaws.com/sitemap-generator/,
-		publicPath:   "public/",
-		sitemapsPath: "sitemaps/",
-		filename:     "sitemap",
-		verbose:      true,
-		compress:     true,
-		pretty:       false,
-		adp:          NewFileAdapter(),
+		defaultHost:     "http://www.example.com",
+		sitemapsHost:    "", // http://s3.amazonaws.com/sitemap-generator/,
+		publicPath:      "public/",
+		sitemapsPath:    "sitemaps/",
+		filename:        "sitemap",
+		verbose:         true,
+		compress:        true,
+		pretty:          false,
+		maxSitemapLinks: MaxSitemapLinks,
+		adp:             NewFileAdapter(),
+		nmr:             nil,
+		loc:             nil,
 	}
 }
 
 // Options exists for the Sitemap struct.
 type Options struct {
-	defaultHost  string
-	sitemapsHost string
-	publicPath   string
-	sitemapsPath string
-	filename     string
-	verbose      bool
-	compress     bool
-	pretty       bool
-	adp          Adapter
-	nmr          *Namer
-	loc          *Location
+	defaultHost     string
+	sitemapsHost    string
+	publicPath      string
+	sitemapsPath    string
+	filename        string
+	verbose         bool
+	compress        bool
+	pretty          bool
+	maxSitemapLinks int
+	adp             Adapter
+	nmr             *Namer
+	loc             *Location
+}
+
+// SetMaxSitemapLinks ...
+func (opts *Options) SetMaxSitemapLinks(cnt int) {
+	opts.maxSitemapLinks = cnt
 }
 
 // SetDefaultHost sets that arg from Sitemap.Finalize method

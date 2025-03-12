@@ -25,11 +25,12 @@ func NewBuilderFile(opts *Options, loc *Location) *BuilderFile {
 
 // BuilderFile provides implementation for the Builder interface.
 type BuilderFile struct {
-	opts    *Options
-	loc     *Location
-	content []byte
-	linkcnt int
-	newscnt int
+	opts            *Options
+	loc             *Location
+	content         []byte
+	linkcnt         int
+	newscnt         int
+	maxSitemapLinks int
 }
 
 // SetLinkCnt ...
@@ -65,7 +66,7 @@ func (b *BuilderFile) Add(url interface{}) BuilderError {
 // isFileCanFit checks bytes to bigger than consts values.
 func (b *BuilderFile) isFileCanFit(bytes []byte) bool {
 	r := len(append(b.content, bytes...)) < MaxSitemapFilesize
-	r = r && b.linkcnt < MaxSitemapLinks
+	r = r && b.linkcnt < b.opts.maxSitemapLinks
 	return r && b.newscnt < MaxSitemapNews
 }
 
