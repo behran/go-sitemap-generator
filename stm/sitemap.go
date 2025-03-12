@@ -33,6 +33,11 @@ func (sm *Sitemap) SetDefaultHost(host string) {
 	sm.opts.SetDefaultHost(host)
 }
 
+// SetMaxSitemapLinks ...
+func (sm *Sitemap) SetMaxSitemapLinks(cnt int) {
+	sm.opts.SetMaxSitemapLinks(cnt)
+}
+
 // SetSitemapsHost is the remote host where your sitemaps will be hosted
 func (sm *Sitemap) SetSitemapsHost(host string) {
 	sm.opts.SetSitemapsHost(host)
